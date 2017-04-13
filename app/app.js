@@ -1,19 +1,11 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import routes from './config/routes';
+// Include the Main React Dependencies
+var React = require("react");
+var ReactDOM = require("react-dom");
 
-// ReactDOM.render(routes, document.getElementById("app"));
+// Grabs the Routes
+var App = require("./config/routes");
 
-
-
-import React from 'react';
-import { render } from 'react-dom';
-import { hashHistory, Router, Route, IndexRoute } from 'react-router';
-import Header from './components/Header';
-
-render((
-  <Router history={hashHistory}>
-    <Route path="/" component={Header} />
-
-  </Router>
-), document.getElementById('app'))
+// Renders the contents according to the route page
+// Displays the contents in the div app of index.html
+// Note how ReactDOM takes in two parameters (the contents and the location)
+ReactDOM.render(App, document.getElementById("app"));
