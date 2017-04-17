@@ -17,8 +17,6 @@ class Container extends Component {
     return (
       <div>
         {children}
-        <p> hi there </p>
-        <Home />
       </div>
     );
 	}

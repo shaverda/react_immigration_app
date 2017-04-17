@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { hashHistory, Router, Route, IndexRoute, IndexRedirect } from 'react-router'
+import { hashHistory, browserHistory, Router, Route, IndexRoute, IndexRedirect } from 'react-router'
 
 import Container from '../components/Container'
 import Login from '../components/Login'
@@ -18,8 +18,11 @@ const requireAuth = (nextState, replace) => {
 }
 
 module.exports = (
-  <Router history={hashHistory}>
-    <Route path="/" component={Container}>
+  <Router history={browserHistory}>
+    <Route path="/" component={Container} auth={auth}>
+    	<IndexRoute component={Home} auth={auth} />
+   		<Route path="home" component={Home} auth={auth} />
+   		<Route path="login" component={Login} />
 
     </Route>
   </Router>
