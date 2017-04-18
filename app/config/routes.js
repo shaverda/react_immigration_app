@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { hashHistory, browserHistory, Router, Route, IndexRoute, IndexRedirect } from 'react-router'
+import { browserHistory, Router, Route, IndexRoute  } from 'react-router'
 
 import Container from '../components/Container'
 import Login from '../components/Login'
 import Home from "../components/Home"
-
+import Contact from "../components/Contact"
 import AuthService from '../utils/AuthService'
 
 const auth = new AuthService('aYQBFES351HrymxuMCJ0vAnog1mDxA0h', 'shaverda.auth0.com');
@@ -22,7 +22,8 @@ module.exports = (
     <Route path="/" component={Container} auth={auth}>
     	<IndexRoute component={Home} auth={auth} />
    		<Route path="home" component={Home} auth={auth} />
-   		<Route path="login" component={Login} />
+   		<Route path="login" component={Login} auth={auth} />
+   		<Route path="contact" component={Contact} auth={auth} />
 
     </Route>
   </Router>

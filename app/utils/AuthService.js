@@ -7,9 +7,15 @@ export default class AuthService {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
         redirectUrl: `${window.location.origin}/login`,
-        responseType: 'token'
+        responseType: 'id_token',
+        params: {scope: 'openid email'}
+      },
+      theme: {
+        logo: "./images/earth.png"
       }
     })
+
+
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', this._doAuthentication.bind(this))
     // binds login functions to keep this context
@@ -18,9 +24,30 @@ export default class AuthService {
 
   _doAuthentication(authResult) {
     // Saves the user token
-    this.setToken(authResult.idToken)
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('email', authResult.idTokenPayload.email);
+    console.log(authResult);
     // navigate to the home route
-    browserHistory.replace('/login')
+    browserHistory.replace('/login');
+        this.lock.getProfile(authResult.idToken, (error, profile) => {
+      if (error) {
+        console.log('Error loading the Profile', error)
+      } else {
+        this.setProfile(profile)
+      }
+    })
+  }
+
+  setProfile(profile) {
+    // Saves profile data to local storage
+    localStorage.setItem('profile', JSON.stringify(profile))
+    // Triggers profile_updated event to update the UI
+    this.emit('profile_updated', profile)
+  }
+  getProfile() {
+    // Retrieves the profile data from local storage
+    const profile = localStorage.getItem('profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
   }
 
   login() {
@@ -31,11 +58,6 @@ export default class AuthService {
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     return !!this.getToken()
-  }
-
-  setToken(idToken) {
-    // Saves user token to local storage
-    localStorage.setItem('id_token', idToken)
   }
 
   getToken() {
