@@ -16,7 +16,7 @@ export class Home extends Component {
   	{console.log(this.props)}
     return (
     	<div>
-			<div>  
+			<div>   
 
 			  <p>What we do: Help connect lawyers and immigrants. </p>
 			  <p>Why? How? </p>

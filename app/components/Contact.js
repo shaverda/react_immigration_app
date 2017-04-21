@@ -10,19 +10,24 @@ export class Contact extends Component {
 
   handleSubmit(event) {
   	event.preventDefault();
+    Materialize.toast('Email sent!', 4000);
   	let data = {
   		name: document.getElementsByName("Name")[0].value,
   		email: document.getElementsByName("Email Address")[0].value,
   		message: document.getElementById("textarea1").value
   	};
+
   	$.ajax({
-	  type: "POST",
-	  url: "/send_email",
-	  data: data,
-	  success: function(){
-	  	console.log("success on client side");
-	  },
-	});
+  	  type: "POST",
+  	  url: "/api/send_email",
+  	  data: data,
+  	  success: function(){
+  	  	console.log("email sent, back to client side now..");
+  	  }
+	 });
+    document.getElementsByName("Name")[0].value = "";
+    document.getElementsByName("Email Address")[0].value = "";
+    document.getElementById("textarea1").value = "";
   }
 
   render() {

@@ -6,7 +6,7 @@ export default class AuthService {
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: `${window.location.origin}/login`,
+        redirectUrl: `${window.location.origin}/survey`,
         responseType: 'id_token',
         params: {scope: 'openid email'}
       },
@@ -28,7 +28,7 @@ export default class AuthService {
     localStorage.setItem('email', authResult.idTokenPayload.email);
     console.log(authResult);
     // navigate to the home route
-    browserHistory.replace('/login');
+    browserHistory.replace('/survey');
         this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
         console.log('Error loading the Profile', error)
@@ -41,8 +41,6 @@ export default class AuthService {
   setProfile(profile) {
     // Saves profile data to local storage
     localStorage.setItem('profile', JSON.stringify(profile))
-    // Triggers profile_updated event to update the UI
-    this.emit('profile_updated', profile)
   }
   getProfile() {
     // Retrieves the profile data from local storage

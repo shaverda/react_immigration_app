@@ -6,6 +6,8 @@ import Container from '../components/Container'
 import Login from '../components/Login'
 import Home from "../components/Home"
 import Contact from "../components/Contact"
+import SurveyContainer from "../components/survey/SurveyContainer"
+
 import AuthService from '../utils/AuthService'
 
 const auth = new AuthService('aYQBFES351HrymxuMCJ0vAnog1mDxA0h', 'shaverda.auth0.com');
@@ -24,6 +26,7 @@ module.exports = (
    		<Route path="home" component={Home} auth={auth} />
    		<Route path="login" component={Login} auth={auth} />
    		<Route path="contact" component={Contact} auth={auth} />
+      <Route path="survey" component={SurveyContainer} auth={auth} onEnter={requireAuth} />
 
     </Route>
   </Router>
