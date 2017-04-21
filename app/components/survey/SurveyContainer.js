@@ -12,12 +12,14 @@ export class SurveyContainer extends Component {
   }
   constructor(props) {
     super(props)
+  }
+  componentWillMount(){
     let user = {
       email: localStorage.getItem('email')
     }
     $.get("/api/user_search/" + user.email, (data) => {
         console.log("line 18");
-        console.log(data + " line 19");
+        console.log(data);
         if (data === null){
           console.log("entered create person");
           // $.get("/api/user_create/" + user.email, (data) => {

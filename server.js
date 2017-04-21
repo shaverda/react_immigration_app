@@ -24,7 +24,9 @@ app.use(express.static("./public"));
 // -------------------------------------------------
 //todo: make actual mongo db ugh!
 // MongoDB Configuration configuration
-mongoose.connect("mongodb://heroku_d29qv78x:3gv81po3gongufm9f8762dalfv@ds161950.mlab.com:61950/heroku_d29qv78x");
+
+// mongoose.connect("mongodb://heroku_d29qv78x:3gv81po3gongufm9f8762dalfv@ds161950.mlab.com:61950/heroku_d29qv78x");
+mongoose.connect("mongodb://localhost/users");
 var db = mongoose.connection;
 
 db.on("error", function(err) {
@@ -60,18 +62,28 @@ app.post("/api/send_email", function(req, res) {
 
 })
 
-app.get("/api/user_search/:email?", function(req, res){
-    user_controller.search(req.params.email, function(err, data){
-        console.log("trying to log error lolz: " + err);
-        console.log(data + " line 65 in server");
-        res.send(data);
+app.get("/api/user_search/:email?", function(req, res) {
+    // user_controller.search(req.params.email, function(err, data) {
+    //     console.log("trying to log error lolz: " + err);
+    //     console.log(data + " line 65 in server");
+    //     res.json(data);
+    // })
+    console.log(req.params.email);
+    User.findOne({ "User.email": req.params.email }).exec(function(error, data) {
+        console.log(data);
+        if (error) {
+            res.json(error);
+        } else {
+            res.json(data);
+        }
     })
 })
-app.get("/api/user_create/:email", function(req, res){
+app.get("/api/user_create/:email", function(req, res) {
     user_controller.create(req.params.email, function(err, data){
         res.json(data);
     })
 })
+
 
 app.get("*", function(req, res) {
     res.sendFile(__dirname + "/public/index.html");

@@ -7,7 +7,7 @@ todo:
 
 
  4/19: re-integrated with sendgrid, email is now successfully working upon contact form submission, reset form on submit, added fun toast on email sent zomg.
- -created route to check if users exist in db, if not, creating 'em'
+ -created route to check if users exist in db, if not, creating 'em'.. but this isn't working right now.. ):
 
 ------
 4/17: added icon usability, implemented contacts component rather than using modal contacts, resized earth on contacts page, set up back end for receiving contacts emails
