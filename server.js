@@ -64,6 +64,7 @@ app.post("/api/send_email", function(req, res) {
 
 
 app.get("/api/user_search/:email?", function(req, res) {
+    console.log(req.params.email);
     User.find({"email": req.params.email }, function(error, data) {
         if (error) {
             res.send(error);
@@ -77,8 +78,18 @@ app.get("/api/user_search/:email?", function(req, res) {
 
 
 app.get("/api/user_create/:email", function(req, res) {
-    user_controller.create(req.params.email, function(err, data) {
-        res.json(data);
+    // user_controller.create(req.params.email, function(err, data) {
+    //     console.log(data);
+    //     res.json(data);
+    // })
+    let user = new User(req.params);
+    user.save(function(err, doc) {
+        if (err) {
+          console.log(err);
+        }
+        else {
+          res.send(doc);
+        }
     })
 })
 

@@ -18,13 +18,11 @@ export class SurveyContainer extends Component {
       email: localStorage.getItem('email')
     }
     $.get("/api/user_search/" + user.email, (data) => {
-        console.log("line 18");
-        console.log(data);
-        if (data === null){
+        if (data.length === 0){
           console.log("entered create person");
-          // $.get("/api/user_create/" + user.email, (data) => {
-          //   console.log(data);
-          // });
+          $.get("/api/user_create/" + user.email, (data) => {
+            console.log(data);
+          });
         }
         else {
           console.log("in line 28 in surveycontainer yo");
