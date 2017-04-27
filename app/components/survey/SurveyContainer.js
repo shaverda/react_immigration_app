@@ -1,5 +1,6 @@
 import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../utils/AuthService'
+import BasicAboutYou from "./shared_info/BasicAboutYou"
 
 export class SurveyContainer extends Component {
   static contextTypes = {
@@ -87,7 +88,7 @@ export class SurveyContainer extends Component {
             <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>
         </div> } 
-      {this.state.form_type === "greencard" && <p> here is conditional rendering</p>}
+      {this.state.form_type === "greencard" && <BasicAboutYou db_id={this.state.db_id}/>}
       {this.state.form_type === "naturalization" && <p> here is ADDITIONAL conditional rendering</p>}
 		</div>
     )

@@ -37,6 +37,11 @@ db.once("open", function() {
     console.log("Mongoose connection successful.");
 });
 
+String.prototype.toObjectId = function() {
+  var ObjectId = (require('mongoose').Types.ObjectId);
+  return new ObjectId(this.toString());
+};
+
 app.post("/api/send_email", function(req, res) {
     var helper = require('sendgrid').mail;
 
@@ -91,6 +96,21 @@ app.get("/api/user_create/:email", function(req, res) {
           res.send(doc);
         }
     })
+})
+
+app.post("/api/post_user", function(req, res) {
+    var query = {'_id': req.body.db_id.toObjectId()};
+
+    User.findOneAndUpdate(query,  { $set: { first_name: req.body.first_name, last_name: req.body.last_name } }, { new: true },
+        function(error, data) {
+        console.log(data);
+        if (error) {
+            res.send(error);
+        } else {
+            console.log(data);
+            res.send(data);
+        } 
+     });
 })
 
 
