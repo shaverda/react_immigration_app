@@ -51,7 +51,7 @@ app.post("/api/send_email", function(req, res) {
     content = new helper.Content("text/plain", req.body.message);
     mail = new helper.Mail(from_email, subject, to_email, content);
 
-    var sg = require('sendgrid')("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");
+    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
     var request = sg.emptyRequest({
         method: 'POST',
         path: '/v3/mail/send',
