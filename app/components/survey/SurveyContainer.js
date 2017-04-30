@@ -1,6 +1,7 @@
 import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../utils/AuthService'
 import BasicAboutYou from "./shared_info/BasicAboutYou"
+import axios from "axios"
 
 export class SurveyContainer extends Component {
   static contextTypes = {
@@ -34,15 +35,24 @@ export class SurveyContainer extends Component {
       email: localStorage.getItem('email')
     }
     var perform_user_search = (user) => {
-      $.get("/api/user_search/" + user.email, (data) => {
-          console.log(data);
-          if (data.length === 0) { //if no user was found in db
+      axios.get("/api/user_search/"+ user.email)  
+      .then( (response) =>{
+        let data = response.data;
+        console.log(data);
+        if (data.length === 0) { //if no user was found in db
               console.log("entered create person");
-              $.get("/api/user_create/" + user.email, (data) => {
-                  console.log(data);
-                  perform_user_search(user);
-              });
-          } else if (data[0].form_type) {
+              // $.get("/api/user_create/" + user.email, (data) => {
+              //     console.log(data);
+              //     perform_user_search(user);
+              // });
+              axios.get("/api/user_create/" + user.email)  
+                .then( (response) =>{
+                  console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+        } else if (data[0].form_type) {
               console.log("has chosen app type");
               this.setState({
                 form_type: data[0].form_type,
@@ -59,7 +69,12 @@ export class SurveyContainer extends Component {
           else {
             console.log("something else!");
           }
+      })
+      .catch(function (error) {
+        console.log(error);
       });
+
+
     }
     perform_user_search(user);
   }

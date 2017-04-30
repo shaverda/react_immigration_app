@@ -1,5 +1,6 @@
 import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../utils/AuthService'
+import axios from "axios"
 
 
 export class Contact extends Component {
@@ -17,14 +18,21 @@ export class Contact extends Component {
   		message: document.getElementById("textarea1").value
   	};
 
-  	$.ajax({
-  	  type: "POST",
-  	  url: "/api/send_email",
-  	  data: data,
-  	  success: function(){
-  	  	console.log("email sent, back to client side now..");
-  	  }
-	 });
+  // 	$.ajax({
+  // 	  type: "POST",
+  // 	  url: "/api/send_email",
+  // 	  data: data,
+  // 	  success: function(){
+  // 	  	console.log("email sent, back to client side now..");
+  // 	  }
+	 // });
+    axios.post("/api/send_email", data)
+    .then(function (response) {
+      console.log("email sent, back to client side now..");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     document.getElementsByName("Name")[0].value = "";
     document.getElementsByName("Email Address")[0].value = "";
     document.getElementById("textarea1").value = "";

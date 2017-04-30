@@ -3,6 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+require('dotenv').config()
 
 // todo: include db schemas
 var User = require("./models/User");

@@ -30,7 +30,12 @@ export class BasicAboutYou extends Component {
     });
 
   }
+  componentDidMount(){
+    Tipped.create('#first_name', 'Your first name, with only letters between A and Z. You will find this on your i-94 in item number 2.');
+    Tipped.create('#last_name', 'Your last name/family name, with only letters between A and Z. You will find this on your i-94 in item number 1.');
+  }
   render(){
+
   	const { auth } = this.props
     return (
      <div className="row">
@@ -48,6 +53,7 @@ export class BasicAboutYou extends Component {
           </div>
           <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>
+
       </div>
     )
   }
