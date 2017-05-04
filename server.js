@@ -3,6 +3,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var axios = require("axios");
+
 require('dotenv').config()
 
 // todo: include db schemas
@@ -39,8 +41,8 @@ db.once("open", function() {
 });
 
 String.prototype.toObjectId = function() {
-  var ObjectId = (require('mongoose').Types.ObjectId);
-  return new ObjectId(this.toString());
+    var ObjectId = (require('mongoose').Types.ObjectId);
+    return new ObjectId(this.toString());
 };
 
 app.post("/api/send_email", function(req, res) {
@@ -71,14 +73,14 @@ app.post("/api/send_email", function(req, res) {
 
 app.get("/api/user_search/:email?", function(req, res) {
     console.log(req.params.email);
-    User.find({"email": req.params.email }, function(error, data) {
+    User.find({ "email": req.params.email }, function(error, data) {
         if (error) {
             res.send(error);
         } else {
             console.log(data);
             res.send(data);
-        } 
-     });
+        }
+    });
 
 });
 
@@ -91,27 +93,37 @@ app.get("/api/user_create/:email", function(req, res) {
     let user = new User(req.params);
     user.save(function(err, doc) {
         if (err) {
-          console.log(err);
-        }
-        else {
-          res.send(doc);
+            console.log(err);
+        } else {
+            res.send(doc);
         }
     })
 })
 
 app.post("/api/post_user", function(req, res) {
-    var query = {'_id': req.body.db_id.toObjectId()};
+    var address_validator_url = "https://us-street.api.smartystreets.com/street-address?auth-id=" + process.env.SMARTYSTREETS_AUTH_ID + "&auth-token=" + process.env.SMARTYSTREETS_AUTH_TOKEN + "&street=" + req.body.street_number + "%20" + req.body.street_name + "&city=" + req.body.city + "&state=" + req.body.state + "&zipcode=" + req.body.zipcode;
+    console.log(address_validator_url);
+    axios.get(address_validator_url)
+        .then(function(response) {
+            console.log(response.data);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 
-    User.findOneAndUpdate(query,  { $set: { first_name: req.body.first_name, last_name: req.body.last_name } }, { new: true },
+    var query = { '_id': req.body.db_id.toObjectId() };
+
+    User.findOneAndUpdate(query, { $set: { first_name: req.body.first_name, last_name: req.body.last_name } }, { new: true },
         function(error, data) {
-        console.log(data);
-        if (error) {
-            res.send(error);
-        } else {
             console.log(data);
-            res.send(data);
-        } 
-     });
+            if (error) {
+                res.send(error);
+            } else {
+                console.log(data);
+                res.send(data);
+            }
+        });
+
 })
 
 

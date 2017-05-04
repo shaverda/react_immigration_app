@@ -1,13 +1,16 @@
-
 # changelog!!!!!!!!!!!!!!!!!!!!!!
 
 todo:  
 -figure out a good way to get log in button from index.html to have document.getElementById("index-login-btn").onclick = {auth.login.bind(this)};
--need to actually make something for the surveyContainer page where they can't decide what they of app they want
+-need to actually make something for the surveyContainer page where they can't decide what they of app they want ("i need help!!")
+--add these to greencard: "C/O (in care of)CityDate of Birth (mm/dd/yyyy) Country of Citizenship/Nationality Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
+U.S. Social Security No. (if any)
+I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
+--still need to work on replying to fail address validation with forcing re-submit and helpful responses
 
+5/4: added Address - Street Number and Name to basicaboutyou and added validation with smartystreets.
 
-
-
+---------
 4/30: -changed all jquery posts/gets to axios, changed sendgrid api key to env var to actually function :)
 ---------
 4/27: created BasicAboutYou component, made the post request, updated db, starting using axios

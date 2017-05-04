@@ -19,6 +19,11 @@ export class BasicAboutYou extends Component {
     let user_info = { 
       first_name: document.getElementById("first_name").value,
       last_name: document.getElementById("last_name").value,
+      street_number: document.getElementById("street_number").value,
+      street_name: document.getElementById("street_name").value,
+      city: document.getElementById("city").value, 
+      state: document.getElementById("state").value,
+      zipcode: document.getElementById("zipcode").value,
       db_id: this.props.db_id
     };
     axios.post('/api/post_user', user_info)
@@ -50,6 +55,31 @@ export class BasicAboutYou extends Component {
               <input id="last_name" type="text" className="validate" required pattern="[a-zA-Z]+" /> 
               <label htmlFor="last_name">Last Name</label>
             </div>
+
+
+            <div className="input-field col s6">
+              <input id="street_number" type="text" className="validate" required pattern="[0-9]+" /> 
+              <label htmlFor="street_number">Street Number</label>
+            </div>
+            <div className="input-field col s6">
+              <input id="street_name" type="text" className="validate" required pattern="[a-zA-Z]+" /> 
+              <label htmlFor="street_name">Street Name</label>
+            </div>
+            <div className="input-field col s6">
+              <input id="city" type="text" className="validate" required pattern="[a-zA-Z ]+" /> 
+              <label htmlFor="city">City</label>
+            </div> 
+            <div className="input-field col s6">
+              <input id="state" type="text" className="validate" required pattern="[a-zA-Z]+" /> 
+              <label htmlFor="state">State</label>
+            </div>
+            <div className="input-field col s6">
+              <input id="zipcode" type="text" className="validate" required pattern="[0-9]+" /> 
+              <label htmlFor="zipcode">Zip Code</label>
+            </div>   
+   
+
+
           </div>
           <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>
