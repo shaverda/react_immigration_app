@@ -17,15 +17,7 @@ export class Contact extends Component {
   		email: document.getElementsByName("Email Address")[0].value,
   		message: document.getElementById("textarea1").value
   	};
-
-  // 	$.ajax({
-  // 	  type: "POST",
-  // 	  url: "/api/send_email",
-  // 	  data: data,
-  // 	  success: function(){
-  // 	  	console.log("email sent, back to client side now..");
-  // 	  }
-	 // });
+    
     axios.post("/api/send_email", data)
     .then(function (response) {
       console.log("email sent, back to client side now..");

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { browserHistory, Router, Route, IndexRoute  } from 'react-router'
+import AuthService from '../utils/AuthService'
 
 import Container from '../components/Container'
 import Login from '../components/Login'
 import Home from "../components/Home"
 import Contact from "../components/Contact"
 import SurveyContainer from "../components/survey/SurveyContainer"
-
-import AuthService from '../utils/AuthService'
+import CountryInfo from "../components/survey/shared_info/CountryInfo"
 
 const auth = new AuthService('aYQBFES351HrymxuMCJ0vAnog1mDxA0h', 'shaverda.auth0.com');
 
@@ -27,7 +27,7 @@ module.exports = (
    		<Route path="login" component={Login} auth={auth} />
    		<Route path="contact" component={Contact} auth={auth} />
       <Route path="survey" component={SurveyContainer} auth={auth} onEnter={requireAuth} />
-
+      <Route path="survey/countryinfo" component={CountryInfo} auth={auth} onEnter={requireAuth} />
     </Route>
   </Router>
 

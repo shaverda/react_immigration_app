@@ -100,20 +100,24 @@ app.get("/api/user_create/:email", function(req, res) {
     })
 })
 
-app.post("/api/post_user", function(req, res) {
+app.post("/api/validate_address", function(req, res){
     var address_validator_url = "https://us-street.api.smartystreets.com/street-address?auth-id=" + process.env.SMARTYSTREETS_AUTH_ID + "&auth-token=" + process.env.SMARTYSTREETS_AUTH_TOKEN + "&street=" + req.body.street_number + "%20" + req.body.street_name + "&city=" + req.body.city + "&state=" + req.body.state + "&zipcode=" + req.body.zipcode;
     console.log(address_validator_url);
+
     axios.get(address_validator_url)
-        .then(function(response) {
-            console.log(response.data);
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+    .then(function(response) {
+        console.log(response.data);
+        res.send(response.data);
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+})
 
+app.post("/api/post_user", function(req, res) {
     var query = { '_id': req.body.db_id.toObjectId() };
-
-    User.findOneAndUpdate(query, { $set: { first_name: req.body.first_name, last_name: req.body.last_name } }, { new: true },
+    console.log(req.body);
+    User.findOneAndUpdate(query, { $set: { first_name: req.body.first_name, last_name: req.body.last_name, street_number: req.body.street_number, street_name: req.body.street_name, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode, survey_step: req.body.survey_step } }, { new: true },
         function(error, data) {
             console.log(data);
             if (error) {
@@ -124,6 +128,17 @@ app.post("/api/post_user", function(req, res) {
             }
         });
 
+})
+app.post("/api/update_survey_step/:email?", function(req, res){
+    console.log(req.params.email);
+    User.findOneAndUpdate({ "email": req.params.email }, { $set: { survey_step: req.body.survey_step} }, { new: true },function(error, data) {
+        if (error) {
+            res.send(error);
+        } else {
+            console.log(data);
+            res.send(data);
+        }
+    });
 })
 
 

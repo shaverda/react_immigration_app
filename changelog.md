@@ -6,17 +6,22 @@ todo:
 --add these to greencard: "C/O (in care of)CityDate of Birth (mm/dd/yyyy) Country of Citizenship/Nationality Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
 U.S. Social Security No. (if any)
 I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
---still need to work on replying to fail address validation with forcing re-submit and helpful responses
+-get rid of red/green html validation
+-re-structure survey to have basic about you as well as other components be conditionally rendered in surveyContainer 
 
-5/4: added Address - Street Number and Name to basicaboutyou and added validation with smartystreets.
 
+
+
+-----------
+5/5: -gave a mmodal for invalid address entered on BasicAboutYou, added address values into db, created CountryInfo component for next i-485 info, gave a bit more control flow in constructors for logging in on /survey and re-directing to proper survey component, but still needs to be cleaned up..., added datepicker for CountryInfo
+----------
+5/4: added Addresses input to basicaboutyou and added validation with smartystreets.
 ---------
 4/30: -changed all jquery posts/gets to axios, changed sendgrid api key to env var to actually function :)
 ---------
 4/27: created BasicAboutYou component, made the post request, updated db, starting using axios
 -removed sendgrid api key and re-instantiate.. oops
 -added tippedjs for tooltips and reactprogress bars
-
 ----------
 4/26:-made form from survey container to choose greencard or naturalization app
 ---------

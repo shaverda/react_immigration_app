@@ -1,6 +1,8 @@
 import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../utils/AuthService'
 import BasicAboutYou from "./shared_info/BasicAboutYou"
+import CountryInfo from "./shared_info/CountryInfo"
+
 import axios from "axios"
 
 export class SurveyContainer extends Component {
@@ -16,8 +18,33 @@ export class SurveyContainer extends Component {
     super(props);
     this.state = {
       form_type: "",
-      db_id: ""
+      db_id: "",
+      survey_step: ""
     }
+    let user = {
+      email: localStorage.getItem('email')
+    }
+    var perform_user_search = (user) => {
+      axios.get("/api/user_search/"+ user.email)  
+        .then( (response) =>{
+          let data = response.data;
+          console.log(data);
+          if (data.length === 0) { //if no user was found in db
+                console.log("new user has logged in, no survey step found");
+          } else if (data[0].survey_step === "country_info") {
+            this.state =({
+              survey_step: "country_info"
+            })
+          }
+          else {
+            console.log("Whelp. This if statement did nothing.");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    perform_user_search(user);
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -41,10 +68,6 @@ export class SurveyContainer extends Component {
         console.log(data);
         if (data.length === 0) { //if no user was found in db
               console.log("entered create person");
-              // $.get("/api/user_create/" + user.email, (data) => {
-              //     console.log(data);
-              //     perform_user_search(user);
-              // });
               axios.get("/api/user_create/" + user.email)  
                 .then( (response) =>{
                   console.log(response);
@@ -83,7 +106,9 @@ export class SurveyContainer extends Component {
   	const { auth } = this.props
     return (
     <div>
-      {this.state.form_type === "none" &&
+      {this.state.survey_step === "country_info" && <CountryInfo db_id={this.state.db_id} />}
+
+      {this.state.survey_step === "" && this.state.form_type === "none" &&
       <div>
         <h5> Welcome. Choose the application you're here to fill out. </h5>
         <h6> If you're not sure, choose "I don't know", and we'll help you figure it out. </h6> 
@@ -103,8 +128,8 @@ export class SurveyContainer extends Component {
             <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>
         </div> } 
-      {this.state.form_type === "greencard" && <BasicAboutYou db_id={this.state.db_id}/>}
-      {this.state.form_type === "naturalization" && <p> here is ADDITIONAL conditional rendering</p>}
+      {(this.state.survey_step === "") && (this.state.form_type === "greencard") && <BasicAboutYou db_id={this.state.db_id}/>}
+      {(this.state.survey_step === "") && (this.state.form_type === "naturalization") && <p> here is ADDITIONAL conditional rendering</p>}
 		</div>
     )
   }
