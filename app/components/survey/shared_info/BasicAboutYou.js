@@ -2,9 +2,12 @@ import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../../utils/AuthService'
 import axios from "axios"
 import ReactModal from 'react-modal';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DatePicker from 'material-ui/DatePicker';
 
 import CountryInfo from "./CountryInfo"
-
+import injectTapEventPlugin  from "react-tap-event-plugin";
+injectTapEventPlugin();
 
 export class BasicAboutYou extends Component {
   static contextTypes = {
@@ -20,10 +23,13 @@ export class BasicAboutYou extends Component {
     this.state=({
       address: "none",
       showModal: false,
-      survey_step: "basic_about_you"
+      survey_step: "basic_about_you",
+      date_of_birth: null
     });
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+
   }
   handleOpenModal () {
     this.setState({ showModal: true });
@@ -32,10 +38,10 @@ export class BasicAboutYou extends Component {
   handleCloseModal () {
     this.setState({ showModal: false });
   }
-
   handleSubmit(event) {
     event.preventDefault();
-    var user_info = { 
+    var user_info = {
+      email: localStorage.getItem('email'), 
       first_name: document.getElementById("first_name").value,
       last_name: document.getElementById("last_name").value,
       street_number: document.getElementById("street_number").value,
@@ -43,6 +49,7 @@ export class BasicAboutYou extends Component {
       city: document.getElementById("city").value, 
       state: document.getElementById("state").value,
       zipcode: document.getElementById("zipcode").value,
+      date_of_birth: this.state.date_of_birth,
       survey_step: "country_info",
       db_id: this.props.db_id
     };
@@ -82,6 +89,9 @@ export class BasicAboutYou extends Component {
         })
     }
     consume_address_promise();
+  }
+  handleDate(event, date){
+    this.setState({date_of_birth: date})
   }
 
   componentDidMount(){
@@ -135,6 +145,11 @@ export class BasicAboutYou extends Component {
                 <input id="zipcode" type="text" className="validate" required pattern="[0-9]+" /> 
                 <label htmlFor="zipcode">Zip Code</label>
               </div>   
+            </div>
+            <div className="input-field col s6">
+              <MuiThemeProvider>
+                <DatePicker hintText="Date of Birth" onChange={this.handleDate} value ={this.state.date_of_birth} />
+              </MuiThemeProvider>
             </div>
             <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
           </form>

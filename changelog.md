@@ -3,7 +3,7 @@
 todo:  
 -figure out a good way to get log in button from index.html to have document.getElementById("index-login-btn").onclick = {auth.login.bind(this)};
 -need to actually make something for the surveyContainer page where they can't decide what they of app they want ("i need help!!")
---add these to greencard: "C/O (in care of)CityDate of Birth (mm/dd/yyyy) Country of Citizenship/Nationality Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
+--add these to greencard: "Date of Birth (mm/dd/yyyy) Country of Citizenship/Nationality Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
 U.S. Social Security No. (if any)
 I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
 -get rid of red/green html validation
@@ -11,7 +11,7 @@ I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
 
 
 
-
+5/11: added react country selector to CountryInfo, moved DOB to BasicAboutYou and updated corresponding server side code,
 -----------
 5/5: -gave a mmodal for invalid address entered on BasicAboutYou, added address values into db, created CountryInfo component for next i-485 info, gave a bit more control flow in constructors for logging in on /survey and re-directing to proper survey component, but still needs to be cleaned up..., added datepicker for CountryInfo
 ----------

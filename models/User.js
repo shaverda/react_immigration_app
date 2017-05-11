@@ -14,6 +14,7 @@ var UserSchema = new Schema({
 	city: {type: String},
 	state: {type: String},
 	zipcode: {type: Number},
+	date_of_birth: {type: Date},
 	survey_step: {type: String}
 });
 

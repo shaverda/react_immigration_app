@@ -26,7 +26,7 @@ module.exports = (
    		<Route path="home" component={Home} auth={auth} />
    		<Route path="login" component={Login} auth={auth} />
    		<Route path="contact" component={Contact} auth={auth} />
-      <Route path="survey" component={SurveyContainer} auth={auth} onEnter={requireAuth} />
+      <Route path="survey" component={SurveyContainer} auth={auth} />
       <Route path="survey/countryinfo" component={CountryInfo} auth={auth} onEnter={requireAuth} />
     </Route>
   </Router>

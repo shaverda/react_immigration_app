@@ -117,7 +117,7 @@ app.post("/api/validate_address", function(req, res){
 app.post("/api/post_user", function(req, res) {
     var query = { '_id': req.body.db_id.toObjectId() };
     console.log(req.body);
-    User.findOneAndUpdate(query, { $set: { first_name: req.body.first_name, last_name: req.body.last_name, street_number: req.body.street_number, street_name: req.body.street_name, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode, survey_step: req.body.survey_step } }, { new: true },
+    User.findOneAndUpdate(query, { $set: {email: req.body.email, first_name: req.body.first_name, last_name: req.body.last_name, street_number: req.body.street_number, street_name: req.body.street_name, city: req.body.city, state: req.body.state, zipcode: req.body.zipcode, date_of_birth: req.body.date_of_birth, survey_step: req.body.survey_step } }, { new: true },
         function(error, data) {
             console.log(data);
             if (error) {

@@ -1,14 +1,13 @@
 import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../../utils/AuthService'
 import axios from "axios"
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import DatePicker from 'material-ui/DatePicker';
 import reactDOM from 'react-dom'
+import CountrySelect from "react-country-select";
 
 import injectTapEventPlugin  from "react-tap-event-plugin";
-injectTapEventPlugin();
 
-// --add these to greencard: "C/O (in care of)Date of Birth (mm/dd/yyyy) Country of Citizenship/Nationality Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
+// --add these to greencard: "             Country of Citizenship/Nationality
+//Date of Last Arrival (mm/dd/yyyy) Current USCIS Status
 // U.S. Social Security No. (if any)
 // alert(moment("05/22/2012", 'MM/DD/YYYY',true).isValid()); //true
 
@@ -19,7 +18,8 @@ export class CountryInfo extends Component {
 
   static propTypes = {
     location: T.object,
-    auth: T.instanceOf(AuthService)
+    auth: T.instanceOf(AuthService),
+    onSelect: React.PropTypes.func
   }
   constructor(props) {
     super(props);
@@ -41,6 +41,12 @@ export class CountryInfo extends Component {
         });
     }
     update_user_step(user);
+    this.onSelect = this.onSelect.bind(this);
+
+  }
+  onSelect(val) {
+      console.log("values selected are:", val);
+      //you can handle options selected here.
   }
 
   handleSubmit(event) {
@@ -56,15 +62,8 @@ export class CountryInfo extends Component {
         <form className="col s12" id="info_form">
           <div className="row">
             <div className="input-field col s6">
-              <input id="first_name" type="text" className="validate" required pattern="[a-zA-Z]+" />
-              <label htmlFor="first_name">First Name</label>
+              <CountrySelect flagImagePath="./images/flags/" onSelect={this.onSelect}/>
             </div>
-            <div className="input-field col s6">
-              <MuiThemeProvider>
-                <DatePicker hintText="Portrait Dialog" />
-              </MuiThemeProvider>
-            </div>
-            
           </div>
           <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>

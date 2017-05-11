@@ -21,6 +21,7 @@
     "babel-loader": "^7.0.0",
     "dotenv": "*",
     "react": "^15.5.4",
+    "react-country-select": "^1.0.5",
     "react-dom": "^15.5.4",
     "react-modal": "*",
     "react-router": "^2.8.1",

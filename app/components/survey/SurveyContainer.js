@@ -130,6 +130,8 @@ export class SurveyContainer extends Component {
         </div> } 
       {(this.state.survey_step === "") && (this.state.form_type === "greencard") && <BasicAboutYou db_id={this.state.db_id}/>}
       {(this.state.survey_step === "") && (this.state.form_type === "naturalization") && <p> here is ADDITIONAL conditional rendering</p>}
+      <br />
+      <a id="btn-logout" onClick={auth.logout.bind(this)} className="waves-effect waves-light btn">logout</a>
 		</div>
     )
   }

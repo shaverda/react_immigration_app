@@ -13,7 +13,6 @@ export class Home extends Component {
 
   render(){
   	const { auth } = this.props
-  	{console.log(this.props)}
     return (
     	<div>
 			<div>   
