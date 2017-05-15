@@ -25,10 +25,6 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("./public"));
 
 // -------------------------------------------------
-//todo: make actual mongo db ugh!
-// MongoDB Configuration configuration
-
-// mongoose.connect("mongodb://heroku_d29qv78x:3gv81po3gongufm9f8762dalfv@ds161950.mlab.com:61950/heroku_d29qv78x");
 mongoose.connect("mongodb://localhost/React");
 var db = mongoose.connection;
 
@@ -86,10 +82,6 @@ app.get("/api/user_search/:email?", function(req, res) {
 
 
 app.get("/api/user_create/:email", function(req, res) {
-    // user_controller.create(req.params.email, function(err, data) {
-    //     console.log(data);
-    //     res.json(data);
-    // })
     let user = new User(req.params);
     user.save(function(err, doc) {
         if (err) {

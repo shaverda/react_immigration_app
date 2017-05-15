@@ -11,6 +11,8 @@ I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
 
 
 
+
+-----------
 5/11: added react country selector to CountryInfo, moved DOB to BasicAboutYou and updated corresponding server side code,
 -----------
 5/5: -gave a mmodal for invalid address entered on BasicAboutYou, added address values into db, created CountryInfo component for next i-485 info, gave a bit more control flow in constructors for logging in on /survey and re-directing to proper survey component, but still needs to be cleaned up..., added datepicker for CountryInfo
@@ -30,6 +32,5 @@ I-94 Arrival-Departure Record Number Expires on (mm/dd/yyyy) ""
 ----------
  4/19: re-integrated with sendgrid, email is now successfully working upon contact form submission, reset form on submit, added fun toast on email sent zomg.
  -created route to check if users exist in db, if not, creating 'em'.. but this isn't working right now.. ):
-
 ---------
 4/17: added icon usability, implemented contacts component rather than using modal contacts, resized earth on contacts page, set up back end for receiving contacts emails

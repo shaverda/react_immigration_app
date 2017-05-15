@@ -61,10 +61,11 @@ export class CountryInfo extends Component {
       <h4> Next, let's go a little deeper... </h4>
         <form className="col s12" id="info_form">
           <div className="row">
-            <div className="input-field col s6">
+            <div className=" col s6">
               <CountrySelect flagImagePath="./images/flags/" onSelect={this.onSelect}/>
             </div>
           </div>
+          <br /> <br /> <br />
           <a id="btn-submit" onClick={(event)=>this.handleSubmit(event)} className="waves-effect waves-light btn">submit</a>
         </form>
 
