@@ -1,5 +1,7 @@
 import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
+import store from "../store";
+import {addData} from "../actions/profile";
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -33,7 +35,8 @@ export default class AuthService {
       if (error) {
         console.log('Error loading the Profile', error)
       } else {
-        this.setProfile(profile)
+        this.setProfile(profile);
+        store.dispatch(addData(profile));
       }
     })
   }

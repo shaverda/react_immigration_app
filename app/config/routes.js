@@ -5,7 +5,7 @@ import AuthService from '../utils/AuthService'
 import { Provider } from 'react-redux'
 import store, { history } from '../store';
 
-
+import App from "../app"
 import Container from '../components/Container'
 import Login from '../components/Login'
 import Home from "../components/Home"
@@ -23,18 +23,20 @@ const requireAuth = (nextState, replace) => {
 };
 
 
-module.exports = (
+const router = (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Container} auth={auth}>
-      	<IndexRoute component={Home} auth={auth} />
-     		<Route path="home" component={Home} auth={auth} />
-     		<Route path="login" component={Login} auth={auth} />
-     		<Route path="contact" component={Contact} auth={auth} />
-        <Route path="survey" component={SurveyContainer} auth={auth} />
-        <Route path="survey/countryinfo" component={CountryInfo} auth={auth} onEnter={requireAuth} />
+    <Router history={history}>
+      <Route path="/" component={App} auth={auth}>
+      	<IndexRoute component={Home} auth={auth}/>
+     		<Route path="home" component={Home} auth={auth}/>
+     		<Route path="login" component={Login} auth={auth}/>
+     		<Route path="contact" component={Contact} auth={auth}/>
+        <Route path="survey" component={SurveyContainer} auth={auth}/>
+        <Route path="survey/countryinfo" component={CountryInfo} auth={auth}/>
       </Route>
     </Router>
   </Provider>
-
 );
+
+render(router, document.getElementById('app'));
+
