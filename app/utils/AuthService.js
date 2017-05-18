@@ -1,7 +1,7 @@
 import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
 import store from "../store";
-import {addData} from "../actions/profile";
+import {addData} from "../actions/actionCreators";
 
 export default class AuthService {
   constructor(clientId, domain) {

@@ -1,11 +1,8 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { browserHistory, Router, Route, IndexRoute  } from 'react-router'
-import AuthService from '../utils/AuthService'
-import { Provider } from 'react-redux'
-import store, { history } from '../store';
+import React, { Component } from "react";
+import { Route, Router, IndexRoute, browserHistory } from "react-router";
+import { connect } from "react-redux";
+import AuthService from "../utils/AuthService";
 
-import App from "../app"
 import Container from '../components/Container'
 import Login from '../components/Login'
 import Home from "../components/Home"
@@ -21,22 +18,26 @@ const requireAuth = (nextState, replace) => {
     replace({ pathname: '/login' })
   };
 };
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
 
 
-const router = (
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App} auth={auth}>
-      	<IndexRoute component={Home} auth={auth}/>
-     		<Route path="home" component={Home} auth={auth}/>
-     		<Route path="login" component={Login} auth={auth}/>
-     		<Route path="contact" component={Contact} auth={auth}/>
-        <Route path="survey" component={SurveyContainer} auth={auth}/>
-        <Route path="survey/countryinfo" component={CountryInfo} auth={auth}/>
-      </Route>
-    </Router>
-  </Provider>
-);
-
-render(router, document.getElementById('app'));
-
+export default class App extends Component {
+  render() {
+    const routes = 
+    <Route path="/" component={Container} auth={auth}>
+        <IndexRoute component={Home} auth={auth}/>
+        <Route path="home" component={Home} auth={auth}/>
+        <Route path="login" component={Login} />
+        <Route path="contact" component={Contact} />
+        <Route path="survey" component={SurveyContainer} />
+        <Route path="survey/countryinfo" component={CountryInfo} />
+    </Route>;
+    return(
+      <Router history={browserHistory}>     
+        {routes} 
+      </Router>
+    );
+  }
+}

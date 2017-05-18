@@ -4,3 +4,6 @@ export function addData(info) {
     info,
   };
  }
+
+
+

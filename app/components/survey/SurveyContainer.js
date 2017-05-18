@@ -2,10 +2,21 @@ import React, { PropTypes as T, Component } from 'react'
 import AuthService from '../../utils/AuthService'
 import BasicAboutYou from "./shared_info/BasicAboutYou"
 import CountryInfo from "./shared_info/CountryInfo"
+import {addData} from "../../actions/actionCreators.js"
+import {connect} from "react-redux"
 
 import axios from "axios"
 
-export class SurveyContainer extends Component {
+
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
+
+const mapDispatchToProps = {
+  add_data: addData
+}
+
+class SurveyContainer extends Component {
   static contextTypes = {
     router: T.object
   }
@@ -58,6 +69,11 @@ export class SurveyContainer extends Component {
 
   }
   componentWillMount(){
+    console.log("line 72");
+    console.log(this.props);
+    console.log(this.props.profile);
+    console.log(this.props.profile.profile);
+    console.log("line 76");
     let user = {
       email: localStorage.getItem('email')
     }
@@ -137,4 +153,4 @@ export class SurveyContainer extends Component {
   }
 }
 
-export default SurveyContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(SurveyContainer);

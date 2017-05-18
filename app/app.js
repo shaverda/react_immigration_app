@@ -11,21 +11,40 @@
 // ReactDOM.render(App, document.getElementById("app"));
 
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actionCreators from './actions/profile';
-import Container from './components/Container';
+import React from "react";
+import ReactDOM from "react-dom";
+import Routes from "./config/routes";
+import { Provider } from "react-redux";
+import store from "./store";
 
-function mapStateToProps(state) {
-  return {
-    profile: state.profile
-  }
-}
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
 
-function mapDispachToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
-}
+ReactDOM.render(
+	<Provider store={store}>
+		<Routes/>
+	</Provider>, document.getElementById("app"));
 
-const App = connect(mapStateToProps, mapDispachToProps)(Container);
 
-export default App;
+
+
+
+
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import * as actionCreators from './actions/actionCreators';
+// import Home from './components/Home';
+
+// function mapStateToProps(state) {
+//   return {
+//     profile: state.profile
+//   }
+// }
+
+// function mapDispachToProps(dispatch) {
+//   return bindActionCreators(actionCreators, dispatch);
+// }
+
+// const App = connect(mapStateToProps, mapDispachToProps)(Home);
+
+// export default App;

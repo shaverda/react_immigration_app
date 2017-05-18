@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './app/config/routes.js',
+  entry: './app/app.js',
 
   output: {
     filename: 'public/bundle.js',
@@ -10,6 +10,9 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
       { test: /\.css$/, loader: 'style-loader!css-loader'}
     ]
+  },
+  node: {
+    fs: "empty"
   },
   devtool: 'eval-source-map',
 }
