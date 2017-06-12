@@ -14,8 +14,8 @@ export class Home extends Component {
   render(){
   	const { auth } = this.props
     return (
-    	<div>
-			<div>   
+    	<div className="home_blurb_text">
+			<div>  
 
 			  <p>What we do: Help connect lawyers and immigrants. </p>
 			  <p>Why? How? </p>
@@ -26,9 +26,9 @@ export class Home extends Component {
 			  <p>Are you a pro bono lawyer looking to get involved? Please email <a href="mailto:shaverda@gmail.com?Subject=Lawyer%20help" target="_top">shaverda@gmail.com</a> for more information.</p>
 			</div>
 
-			<div id="login">
-			  <h4>Ready to get started?</h4>
-			  <a id="btn-login" onClick={auth.login.bind(this)} className="waves-effect waves-light btn">login</a>
+			<div className="login">
+			  <h5>Ready to get started?</h5>
+			  <a className="btn-login" onClick={auth.login.bind(this)} className="waves-effect waves-light btn">login</a>
 			</div>
 		</div>
     )
