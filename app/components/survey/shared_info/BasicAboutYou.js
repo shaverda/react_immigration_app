@@ -6,8 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 
 import CountryInfo from "./CountryInfo"
-import injectTapEventPlugin  from "react-tap-event-plugin";
-injectTapEventPlugin();
+
 
 export class BasicAboutYou extends Component {
   static contextTypes = {

@@ -19,21 +19,24 @@
   "homepage": "https://github.com/Shaverda/react_immigration_app#readme",
   "dependencies": {
     "babel-loader": "^7.0.0",
+    "css-loader": "^0.28.1",
     "dotenv": "*",
     "prop-types": "^15.5.9",
     "react": "^15.5.4",
     "react-country-select": "^1.0.5",
     "react-dom": "^15.5.4",
     "react-modal": "*",
+    "react-redux": "^5.0.4",
     "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "sendgrid": "^5.1.0",
+    "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
   },
   "devDependencies": {
     "babel-core": "*",
-    "babel-loader": "*",
     "babel-plugin-transform-class-properties": "*",
     "babel-preset-es2015": "*",
     "babel-preset-latest": "*",
@@ -41,8 +44,6 @@
     "babel-preset-stage-0": "*",
     "babel-preset-stage-1": "*",
     "babel-preset-stage-2": "*",
-    "babel-preset-stage-3": "*",
-    "webpack": "*",
-    "webpack-dev-server": "*"
+    "babel-preset-stage-3": "*"
   }
 }

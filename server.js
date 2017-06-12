@@ -81,9 +81,9 @@ app.get("/api/user_search/:email?", function(req, res) {
 });
 
 
-app.get("/api/user_create/:email", function(req, res) {
-    let user = new User(req.params);
-    user.save(function(err, doc) {
+app.post("/api/user_create/:email", function(req, res) {
+    // let user = new User(req.params);
+    User.update({"email": req.params.email}, {upsert: true}, function(err, doc) {
         if (err) {
             console.log(err);
         } else {
