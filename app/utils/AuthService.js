@@ -1,7 +1,7 @@
 import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
 import store from "../store";
-import {addData} from "../actions/actionCreators";
+import { updateData } from "../actions/actionCreators";
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -29,14 +29,15 @@ export default class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('email', authResult.idTokenPayload.email);
     console.log(authResult);
-    // navigate to the home route
-    browserHistory.replace('/survey');
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
         console.log('Error loading the Profile', error)
       } else {
         this.setProfile(profile);
-        store.dispatch(addData(profile));
+        console.log("set profile in authservice");
+        store.dispatch(updateData(profile));
+        // navigate to the home route
+        browserHistory.replace('/survey');
       }
     })
   }
