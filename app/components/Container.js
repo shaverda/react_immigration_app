@@ -13,7 +13,6 @@ class Container extends Component {
         auth: this.props.route.auth //sends auth instance to children
       })
     }
-
     return (
       <div>
         {children}
