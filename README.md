@@ -1,7 +1,5 @@
-# react_immigration_app
+# Immigration Portal
 
-
-**Immigration Portal**
 
 Immigration Portal is an app designed to connect pro-bono lawyers with immigrants looking to file USCIS forms.
 
@@ -12,13 +10,14 @@ Composed of Webpack, React, Redux, and MongoDB. Utilizes the following APIs: Aut
 To run this app on your local computer
 
 ```javascript
-//To Install, first open your terminal and run:
+//To install, first open your terminal and run:
 git clone https://github.com/Shaverda/react_immigration_app.git
 cd react_immigration_app
 npm install
 
-Next, in the same react_immigration_app root directory folder, run:
+//Next, in the same react_immigration_app root directory folder, run:
 touch .env
+```
 
 This creates an environment file, to which you will add your [personal API keys](https://en.wikipedia.org/wiki/Application_programming_interface_key). To do this, edit the conents of this .env file in your favorite text editor. It should have four different lines like this:
 
@@ -37,7 +36,7 @@ Obtain a Smartystreets auth id/auth token by [signing up here.](https://smartyst
 Obtain an Auth0 auth id/domain by [signing up here.](https://auth0.com/signup)
 
 Once you have all 5 keys/auth id/tokens, type them within the single quotes marks in place of 'insert sendgrid api key here'. Save this file, and go back to your terminal within the root react_immigration_app directory. 
-
+```javascript
 //To start your server
 node server
 
